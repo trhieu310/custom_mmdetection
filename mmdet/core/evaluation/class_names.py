@@ -302,6 +302,11 @@ def oid_v6_classes():
         'Rugby ball', 'Armadillo', 'Maracas', 'Helmet'
     ]
 
+###hieunt - define doclayout classes
+def docslayout_classes():
+    return [
+        'Illustration', 'Text', 'ScienceText'
+    ]
 
 dataset_aliases = {
     'voc': ['voc', 'pascal_voc', 'voc07', 'voc12'],
@@ -311,9 +316,9 @@ dataset_aliases = {
     'wider_face': ['WIDERFaceDataset', 'wider_face', 'WIDERFace'],
     'cityscapes': ['cityscapes'],
     'oid_challenge': ['oid_challenge', 'openimages_challenge'],
-    'oid_v6': ['oid_v6', 'openimages_v6']
+    'oid_v6': ['oid_v6', 'openimages_v6'],
+    'docslayout': ['docslayout'] ###hieunt - add alias name for doclayout
 }
-
 
 def get_classes(dataset):
     """Get class names of a dataset."""

@@ -5,6 +5,7 @@ import os
 import os.path as osp
 import time
 import warnings
+import wandb
 
 import mmcv
 import torch
@@ -204,6 +205,7 @@ def main():
     meta['seed'] = seed
     meta['exp_name'] = osp.basename(args.config)
 
+    wandb.init(project="YOLOv5", config=cfg, sync_tensorboard=True)
     model = build_detector(
         cfg.model,
         train_cfg=cfg.get('train_cfg'),

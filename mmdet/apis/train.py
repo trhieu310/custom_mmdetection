@@ -131,8 +131,9 @@ def train_detector(model,
     runner_type = 'EpochBasedRunner' if 'runner' not in cfg else cfg.runner[
         'type']
 
+    ###hieunt - change sample per gpu
     train_dataloader_default_args = dict(
-        samples_per_gpu=2,
+        samples_per_gpu=4,
         workers_per_gpu=2,
         # `num_gpus` will be ignored if distributed
         num_gpus=len(cfg.gpu_ids),
