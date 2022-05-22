@@ -53,7 +53,8 @@ model = dict(
                 in_channels=256,
                 fc_out_channels=1024,
                 roi_feat_size=7,
-                num_classes=80,
+                # num_classes=80, ###Hieunt change num 
+                num_classes=3,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
                     target_means=[0., 0., 0., 0.],
@@ -70,7 +71,8 @@ model = dict(
                 in_channels=256,
                 fc_out_channels=1024,
                 roi_feat_size=7,
-                num_classes=80,
+                # num_classes=80, ###Hieunt change num 
+                num_classes=3,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
                     target_means=[0., 0., 0., 0.],
@@ -87,7 +89,8 @@ model = dict(
                 in_channels=256,
                 fc_out_channels=1024,
                 roi_feat_size=7,
-                num_classes=80,
+                # num_classes=80, ###Hieunt change num 
+                num_classes=3,
                 bbox_coder=dict(
                     type='DeltaXYWHBBoxCoder',
                     target_means=[0., 0., 0., 0.],
@@ -111,7 +114,8 @@ model = dict(
                 num_convs=4,
                 in_channels=256,
                 conv_out_channels=256,
-                num_classes=80,
+                # num_classes=80, ###Hieunt change num 
+                num_classes=3,
                 loss_mask=dict(
                     type='CrossEntropyLoss', use_mask=True, loss_weight=1.0)),
             dict(
@@ -119,7 +123,8 @@ model = dict(
                 num_convs=4,
                 in_channels=256,
                 conv_out_channels=256,
-                num_classes=80,
+                # num_classes=80, ###Hieunt change num 
+                num_classes=3,
                 loss_mask=dict(
                     type='CrossEntropyLoss', use_mask=True, loss_weight=1.0)),
             dict(
@@ -127,7 +132,8 @@ model = dict(
                 num_convs=4,
                 in_channels=256,
                 conv_out_channels=256,
-                num_classes=80,
+                # num_classes=80, ###Hieunt change num 
+                num_classes=3,
                 loss_mask=dict(
                     type='CrossEntropyLoss', use_mask=True, loss_weight=1.0))
         ]),
