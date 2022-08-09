@@ -1,7 +1,7 @@
 # dataset settings
 dataset_type = 'DocslayoutDataset'
 # data_root = '../../../../../../../mnt/datadrive2/quangdq/v2.7.2/'
-data_root = '../../input/cascade-mask-rcnn-data/as'
+data_root = '../../input/cascade-mask-rcnn-data/'
 img_norm_cfg = dict(
     mean=[236.56476823, 236.86395663, 237.62402599], std=[29.52565967, 29.79392858, 29.54714306], to_rgb=True)
 train_pipeline = [
