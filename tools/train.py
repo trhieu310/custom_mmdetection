@@ -205,7 +205,8 @@ def main():
     meta['seed'] = seed
     meta['exp_name'] = osp.basename(args.config)
 
-    wandb.init(project="YOLOv5", config=cfg, sync_tensorboard=True)
+    # wandb.init(project="", config=cfg, sync_tensorboard=True)
+    wandb.init(project="dcu", name="Cascade M_RCNN", config=cfg, sync_tensorboard=True)
     model = build_detector(
         cfg.model,
         train_cfg=cfg.get('train_cfg'),

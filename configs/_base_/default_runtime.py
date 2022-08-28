@@ -12,7 +12,7 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 # load_from = None
-load_from = '../../input/checkpoints-cascade/converted_v2.4.2.pth'
+load_from = '../../input/doc-v28/converted_v2.4.2.pth'
 resume_from = None
 workflow = [('train', 1)]
 
