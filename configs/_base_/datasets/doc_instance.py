@@ -1,5 +1,5 @@
 # dataset settings
-dataset_type = 'DocsLayoutDataset'
+dataset_type = 'DocslayoutDataset'
 classes = ('Illustration', 'Text', 'Science Text')
 # data_root = '../../../../../../../mnt/datadrive2/quangdq/v2.7.2/'
 data_root = '../../input/doc-v28/'
