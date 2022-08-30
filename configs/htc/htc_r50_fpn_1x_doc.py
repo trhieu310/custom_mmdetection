@@ -1,4 +1,4 @@
-_base_ = './htc_without_semantic_r50_fpn_1x_coco_custom.py'
+_base_ = './htc_without_semantic_r50_fpn_1x_doc.py'
 model = dict(
     roi_head=dict(
         semantic_roi_extractor=dict(
