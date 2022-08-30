@@ -1,5 +1,5 @@
 _base_ = [
-    '../_base_/datasets/doclayout_instance.py',
+    '../_base_/datasets/docl_instance.py',
     '../_base_/schedules/schedule_1x.py', '../_base_/default_runtime.py'
 ]
 # model settings

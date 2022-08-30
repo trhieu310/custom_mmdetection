@@ -17,7 +17,8 @@ model = dict(
             num_classes=3,
             loss_seg=dict(
                 type='CrossEntropyLoss', ignore_index=255, loss_weight=0.2))))
-data_root = '../../input/dcu272/'
+# data_root = '../../input/dcu272/'
+data_root = '../../input/doc-v28/'
 img_norm_cfg = dict(
     mean=[236.56476823, 236.86395663, 237.62402599], std=[29.52565967, 29.79392858, 29.54714306], to_rgb=True)
 train_pipeline = [
