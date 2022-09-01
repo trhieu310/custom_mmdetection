@@ -5,7 +5,7 @@ classes = ('Illustration', 'Text', 'Science Text')
 data_root = '../../input/doc-v28/'
 # data_root = '../../input/cascade-mask-rcnn-data/'
 img_norm_cfg = dict(
-    mean=[236.56476823, 236.86395663, 237.62402599], std=[29.52565967, 29.79392858, 29.54714306], to_rgb=True)
+    mean=[239.99624306, 239.86340489, 240.44363462], std=[29.66910737, 29.56400222, 29.36436548], to_rgb=True)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
