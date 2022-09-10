@@ -18,9 +18,10 @@ model = dict(
             loss_seg=dict(
                 type='CrossEntropyLoss', ignore_index=255, loss_weight=0.2))))
 # data_root = '../../input/dcu272/'
+# data_root = '../../input/cascade-mask-rcnn-data/'
 data_root = '../../input/doc-v28/'
 img_norm_cfg = dict(
-    mean=[236.56476823, 236.86395663, 237.62402599], std=[29.52565967, 29.79392858, 29.54714306], to_rgb=True)
+    mean=[239.99624306, 239.86340489, 240.44363462], std=[29.66910737, 29.56400222, 29.36436548], to_rgb=True)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
@@ -53,6 +54,7 @@ test_pipeline = [
 data = dict(
     train=dict(
         # seg_prefix=data_root + 'stuffthingmaps/train2017/',
+        seg_prefix=data_root + 'semantic_mask/',
         pipeline=train_pipeline),
     val=dict(pipeline=test_pipeline),
     test=dict(pipeline=test_pipeline))
