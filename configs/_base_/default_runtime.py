@@ -1,7 +1,9 @@
 checkpoint_config = dict(interval=1)
+# checkpoint_config = dict(interval=10000, by_epoch=False)
 # yapf:disable
 log_config = dict(
-    interval=50,
+    # interval=50,
+    interval=100,
     hooks=[
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook')
@@ -11,8 +13,8 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-# load_from = None
-load_from = '../../input/checkpoints-cascade/converted_v2.4.2.pth'
+load_from = None
+# load_from = '../../input/doc-v28/converted_v2.4.2.pth'
 resume_from = None
 workflow = [('train', 1)]
 
@@ -25,4 +27,5 @@ mp_start_method = 'fork'
 #   - `enable` means enable scaling LR automatically
 #       or not by default.
 #   - `base_batch_size` = (8 GPUs) x (2 samples per GPU).
-auto_scale_lr = dict(enable=False, base_batch_size=4) ###Hieunt - change base bacth_size
+# auto_scale_lr = dict(enable=False, base_batch_size=4)
+auto_scale_lr = dict(enable=True, base_batch_size=6) ###Hieunt - change base bacth_size
