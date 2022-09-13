@@ -50,7 +50,7 @@ data = dict(
     test=dict(
         type=dataset_type,
         classes=classes,
-        ann_file=data_root + 'anns/v2.8.0_testing.json',
-        img_prefix=data_root,
+        ann_file=data_root + 'datatest/GT_fiftyone.json',
+        img_prefix=data_root + 'datatest/images/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
