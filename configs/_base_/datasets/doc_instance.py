@@ -37,7 +37,15 @@ data = dict(
     train=dict(
         type=dataset_type,
         classes=classes,
-        ann_file=[data_root+'anns/v2.7.2.3_training.json', data_root+'anns/v2.8.0_training.json', data_root + 'anns/real_anns.json'],
+        ann_file=[
+            data_root+'anns/v2.7.2.3_training.json', 
+            data_root+'anns/v2.8.0_training.json', 
+            data_root + 'anns/ann_r_0.0.0.json',
+            data_root + 'anns/ann_r_1.0.1.json',
+            data_root + 'anns/anns_dr_v1.0.0.json',
+            data_root + 'anns/anns_r_1.0.2.json',
+            data_root + 'anns/anns_r_1.0.3.json',
+        ],
         img_prefix=data_root,
         pipeline=train_pipeline),
     val=dict(
