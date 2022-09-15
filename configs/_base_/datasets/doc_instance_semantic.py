@@ -1,7 +1,7 @@
 # dataset settings
-dataset_type = 'CocoDataset'
-# data_root = 'data/coco/'
 classes = ('Illustration', 'Text', 'ScienceText')
+dataset_type = 'DocslayoutDataset'
+# data_root = 'data/coco/'
 data_root = '../../input/doc-v28/'
 img_norm_cfg = dict(
     mean=[239.99624306, 239.86340489, 240.44363462], std=[29.66910737, 29.56400222, 29.36436548], to_rgb=True)
