@@ -13,8 +13,8 @@ custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
-# load_from = '../../input/doc-v28/converted_v2.4.2.pth'
+# load_from = None
+load_from = '../../input/doc-v28/converted_v2.4.2.pth'
 resume_from = None
 workflow = [('train', 1)]
 
@@ -28,4 +28,4 @@ mp_start_method = 'fork'
 #       or not by default.
 #   - `base_batch_size` = (8 GPUs) x (2 samples per GPU).
 # auto_scale_lr = dict(enable=False, base_batch_size=4)
-auto_scale_lr = dict(enable=True, base_batch_size=5) ###Hieunt - change base bacth_size
+auto_scale_lr = dict(enable=True, base_batch_size=4) ###Hieunt - change base bacth_size

@@ -1,24 +1,7 @@
-_base_ = './htc_without_semantic_r50_fpn_1x_doc.py'
-model = dict(
-    roi_head=dict(
-        semantic_roi_extractor=dict(
-            type='SingleRoIExtractor',
-            roi_layer=dict(type='RoIAlign', output_size=14, sampling_ratio=0),
-            out_channels=256,
-            featmap_strides=[8]),
-        semantic_head=dict(
-            type='FusedSemanticHead',
-            num_ins=5,
-            fusion_level=1,
-            num_convs=4,
-            in_channels=256,
-            conv_out_channels=256,
-            # num_classes=183, ###Hieunt change num 
-            num_classes=4,
-            loss_seg=dict(
-                type='CrossEntropyLoss', ignore_index=255, loss_weight=0.2))))
-# data_root = '../../input/dcu272/'
-# data_root = '../../input/cascade-mask-rcnn-data/'
+# dataset settings
+dataset_type = 'CocoDataset'
+# data_root = 'data/coco/'
+classes = ('Illustration', 'Text', 'ScienceText')
 data_root = '../../input/doc-v28/'
 img_norm_cfg = dict(
     mean=[239.99624306, 239.86340489, 240.44363462], std=[29.66910737, 29.56400222, 29.36436548], to_rgb=True)
@@ -29,7 +12,7 @@ train_pipeline = [
     dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.0),
     dict(type='Normalize', **img_norm_cfg),
-    # dict(type='Pad', size_divisor=32), ##hieunt - comment padding
+    # dict(type='Pad', size_divisor=32),
     dict(type='SegRescale', scale_factor=1 / 8),
     dict(type='DefaultFormatBundle'),
     dict(
@@ -46,15 +29,36 @@ test_pipeline = [
             dict(type='Resize', keep_ratio=True),
             dict(type='RandomFlip', flip_ratio=0.0),
             dict(type='Normalize', **img_norm_cfg),
-            # dict(type='Pad', size_divisor=32), ##hieunt - comment padding
+            # dict(type='Pad', size_divisor=32),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
         ])
 ]
 data = dict(
+    samples_per_gpu=4,
+    workers_per_gpu=0,
     train=dict(
-        # seg_prefix=data_root + 'stuffthingmaps/train2017/',
-        # seg_prefix=data_root + 'semantic_mask/',
+        type=dataset_type,
+        ann_file=[
+            data_root+'anns/v2.7.2.3_training.json', 
+            data_root+'anns/v2.8.0_training.json', 
+            data_root + 'anns/ann_r_0.0.0.json',
+            data_root + 'anns/ann_r_1.0.1.json',
+            data_root + 'anns_dr_v1.0.0.json',
+            data_root + 'anns_r_1.0.2.json',
+            data_root + 'anns_r_1.0.3.json',
+        ],
+        img_prefix=data_root,
+        seg_prefix=data_root + 'semantic_mask/',
         pipeline=train_pipeline),
-    val=dict(pipeline=test_pipeline),
-    test=dict(pipeline=test_pipeline))
+    val=dict(
+        type=dataset_type,
+        ann_file=data_root + 'anns/v2.8.0_testing.json',
+        img_prefix=data_root,
+        pipeline=test_pipeline),
+    test=dict(
+        type=dataset_type,
+        ann_file=data_root + 'datatest/GT_fiftyone.json',
+        img_prefix=data_root + 'datatest/images/',
+        pipeline=test_pipeline))
+evaluation = dict(metric=['bbox', 'segm'])
