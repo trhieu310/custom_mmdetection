@@ -49,7 +49,7 @@ data = dict(
             data_root + 'anns/anns_r_1.0.3.json',
         ],
         img_prefix=data_root,
-        seg_prefix=data_root + 'semantic_mask/',
+        # seg_prefix=data_root + 'semantic_mask/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
