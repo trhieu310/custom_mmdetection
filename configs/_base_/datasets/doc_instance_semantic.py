@@ -39,6 +39,7 @@ data = dict(
     workers_per_gpu=0,
     train=dict(
         type=dataset_type,
+        classes=classes,
         ann_file=[
             data_root+'anns/v2.7.2.3_training.json', 
             data_root+'anns/v2.8.0_training.json', 
@@ -49,15 +50,17 @@ data = dict(
             data_root + 'anns/anns_r_1.0.3.json',
         ],
         img_prefix=data_root,
-        # seg_prefix=data_root + 'semantic_mask/',
+        seg_prefix=data_root + 'semantic_mask/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
+        classes=classes,
         ann_file=data_root + 'anns/v2.8.0_testing.json',
         img_prefix=data_root,
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
+        classes=classes,
         ann_file=data_root + 'datatest/GT_fiftyone.json',
         img_prefix=data_root + 'datatest/images/',
         pipeline=test_pipeline))
