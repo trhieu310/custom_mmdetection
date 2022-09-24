@@ -136,7 +136,23 @@ model = dict(
                 num_classes=3,
                 loss_mask=dict(
                     type='CrossEntropyLoss', use_mask=True, loss_weight=1.0))
-        ]),
+        ],
+        semantic_roi_extractor=dict(
+            type='SingleRoIExtractor',
+            roi_layer=dict(type='RoIAlign', output_size=14, sampling_ratio=0),
+            out_channels=256,
+            featmap_strides=[8]),
+        semantic_head=dict(
+            type='FusedSemanticHead',
+            num_ins=5,
+            fusion_level=1,
+            num_convs=4,
+            in_channels=256,
+            conv_out_channels=256,
+            # num_classes=183, ###Hieunt change num 
+            num_classes=4,
+            loss_seg=dict(
+                type='CrossEntropyLoss', ignore_index=255, loss_weight=0.2))),
     # model training and testing settings
     train_cfg=dict(
         rpn=dict(
@@ -223,7 +239,7 @@ model = dict(
             mask_thr_binary=0.5)))
 img_norm_cfg = dict(
     ###Hieunt - change mean - std of doclayout v2.7.2
-    mean=[236.56476823, 236.86395663, 237.62402599], std=[29.52565967, 29.79392858, 29.54714306], to_rgb=True)
+    mean=[239.99624306, 239.86340489, 240.44363462], std=[29.66910737, 29.56400222, 29.36436548], to_rgb=True)
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
