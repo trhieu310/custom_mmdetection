@@ -136,23 +136,23 @@ model = dict(
                 num_classes=3,
                 loss_mask=dict(
                     type='CrossEntropyLoss', use_mask=True, loss_weight=1.0))
-        ],
-        semantic_roi_extractor=dict(
-            type='SingleRoIExtractor',
-            roi_layer=dict(type='RoIAlign', output_size=14, sampling_ratio=0),
-            out_channels=256,
-            featmap_strides=[8]),
-        semantic_head=dict(
-            type='FusedSemanticHead',
-            num_ins=5,
-            fusion_level=1,
-            num_convs=4,
-            in_channels=256,
-            conv_out_channels=256,
-            # num_classes=183, ###Hieunt change num 
-            num_classes=4,
-            loss_seg=dict(
-                type='CrossEntropyLoss', ignore_index=255, loss_weight=0.2))),
+        ]),
+        # semantic_roi_extractor=dict(
+        #     type='SingleRoIExtractor',
+        #     roi_layer=dict(type='RoIAlign', output_size=14, sampling_ratio=0),
+        #     out_channels=256,
+        #     featmap_strides=[8]),
+        # semantic_head=dict(
+        #     type='FusedSemanticHead',
+        #     num_ins=5,
+        #     fusion_level=1,
+        #     num_convs=4,
+        #     in_channels=256,
+        #     conv_out_channels=256,
+        #     # num_classes=183, ###Hieunt change num 
+        #     num_classes=4,
+        #     loss_seg=dict(
+        #         type='CrossEntropyLoss', ignore_index=255, loss_weight=0.2))),
     # model training and testing settings
     train_cfg=dict(
         rpn=dict(
