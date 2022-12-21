@@ -2,7 +2,7 @@
 dataset_type = 'GraphDataset'
 classes = ('Table', 'Graphic', 'Geometry', 'Logo', 'Figure', 'Variation', 'Natural')
 # data_root = '/home/hieunt/Graph_Object_Data/'
-data_root = '../../input/graphical/graphical/'
+data_root = '../../input/graphical/'
 img_norm_cfg = dict(
     mean=[237.48618173, 236.966083, 237.09603447], std=[37.42294109, 37.52417463, 38.4937926], to_rgb=True)
 train_pipeline = [
