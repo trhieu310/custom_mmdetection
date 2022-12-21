@@ -2917,3 +2917,47 @@ class CopyPaste:
         repr_str += f'mask_occluded_thr={self.mask_occluded_thr}, '
         repr_str += f'selected={self.selected}, '
         return repr_str
+
+@PIPELINES.register_module()
+class ResizeFreeLayout(Resize):
+    def _random_scale(self, results):
+        """Randomly sample an img_scale according to ``ratio_range`` and
+        ``multiscale_mode``.
+
+        If ``ratio_range`` is specified, a ratio will be sampled and be
+        multiplied with ``img_scale``.
+        If multiple scales are specified by ``img_scale``, a scale will be
+        sampled according to ``multiscale_mode``.
+        Otherwise, single scale will be used.
+
+        Args:
+            results (dict): Result dict from :obj:`dataset`.
+
+        Returns:
+            dict: Two new keys 'scale` and 'scale_idx` are added into \
+                ``results``, which would be used by subsequent pipelines.
+        """
+        self._set_scale_size(results)
+        if self.ratio_range is not None:
+            scale, scale_idx = self.random_sample_ratio(
+                self.img_scale[0], self.ratio_range)
+        elif len(self.img_scale) == 1:
+            scale, scale_idx = self.img_scale[0], 0
+        elif self.multiscale_mode == 'range':
+            scale, scale_idx = self.random_sample(self.img_scale)
+        elif self.multiscale_mode == 'value':
+            scale, scale_idx = self.random_select(self.img_scale)
+        else:
+            raise NotImplementedError
+
+        results['scale'] = scale
+        results['scale_idx'] = scale_idx
+
+    def _set_scale_size(self, results):
+        height, width = results["ori_shape"][:2]
+        max_length = max(height, width)
+        max_size = max(min(round(max_length / 32 + 0.5), 32), 10) * 32
+        sf = max_size / max_length
+        ns = tuple((np.array(results["ori_shape"][:2]) * (sf / 32) * 32 + 0.5).astype(int))
+        print(ns)
+        self.img_scale = [ns]

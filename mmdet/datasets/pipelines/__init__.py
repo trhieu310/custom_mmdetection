@@ -14,7 +14,7 @@ from .transforms import (Albu, CopyPaste, CutOut, Expand, MinIoURandomCrop,
                          MixUp, Mosaic, Normalize, Pad, PhotoMetricDistortion,
                          RandomAffine, RandomCenterCropPad, RandomCrop,
                          RandomFlip, RandomShift, Resize, SegRescale,
-                         YOLOXHSVRandomAug)
+                         YOLOXHSVRandomAug,ResizeFreeLayout)
 
 __all__ = [
     'Compose', 'to_tensor', 'ToTensor', 'ImageToTensor', 'ToDataContainer',
@@ -26,5 +26,5 @@ __all__ = [
     'InstaBoost', 'RandomCenterCropPad', 'AutoAugment', 'CutOut', 'Shear',
     'Rotate', 'ColorTransform', 'EqualizeTransform', 'BrightnessTransform',
     'ContrastTransform', 'Translate', 'RandomShift', 'Mosaic', 'MixUp',
-    'RandomAffine', 'YOLOXHSVRandomAug', 'CopyPaste'
+    'RandomAffine', 'YOLOXHSVRandomAug', 'CopyPaste', 'ResizeFreeLayout'
 ]

@@ -307,6 +307,9 @@ def docslayout_classes():
         'Illustration', 'Text', 'ScienceText'
     ]
 
+def graph_classes():
+    return ['Table', 'Graphic', 'Geometry', 'Logo', 'Figure', 'Variation', 'Natural']
+
 dataset_aliases = {
     'voc': ['voc', 'pascal_voc', 'voc07', 'voc12'],
     'imagenet_det': ['det', 'imagenet_det', 'ilsvrc_det'],
@@ -316,7 +319,8 @@ dataset_aliases = {
     'cityscapes': ['cityscapes'],
     'oid_challenge': ['oid_challenge', 'openimages_challenge'],
     'oid_v6': ['oid_v6', 'openimages_v6'],
-    'docslayout': ['docslayout']
+    'docslayout': ['docslayout'],
+    'GraphDataset': ['GraphDataset']
 }
 
 
