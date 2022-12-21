@@ -7,25 +7,25 @@ img_norm_cfg = dict(
     mean=[237.48618173, 236.966083, 237.09603447], std=[37.42294109, 37.52417463, 38.4937926], to_rgb=True)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
+    dict(type='LoadAnnotations', with_bbox=True, with_mask=False),
     # dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
     dict(type='ResizeFreeLayout'),
     dict(type='RandomFlip', flip_ratio=0.0),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
     dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
+    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']), # , 'gt_masks'
 ]
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        # img_scale=(1333, 800),
+        img_scale=(1333, 800),
         flip=False,
         transforms=[
             # dict(type='Resize', keep_ratio=True),
             dict(type='ResizeFreeLayout'),
-            dict(type='RandomFlip', flip_ratio=0.0),
+            # dict(type='RandomFlip', flip_ratio=0.0),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='Pad', size_divisor=32),
             dict(type='ImageToTensor', keys=['img']),
