@@ -2959,5 +2959,4 @@ class ResizeFreeLayout(Resize):
         max_size = max(min(round(max_length / 32 + 0.5), 32), 10) * 32
         sf = max_size / max_length
         ns = tuple((np.array(results["ori_shape"][:2]) * (sf / 32) * 32 + 0.5).astype(int))
-        print(ns)
         self.img_scale = [ns]

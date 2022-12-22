@@ -41,8 +41,8 @@ data = dict(
                   data_root + 'anns/ann_part_24_graph.json',
                 #   data_root + 'anns/ann_part_25_graph.json', 
                   data_root + 'anns/ann_part_26_graph.json',
-                  data_root + 'anns/illustration.json'],
-                #   data_root + 'anns/table.json'],
+                  data_root + 'anns/illustration.json',
+                  data_root + 'anns/tab?le.json'],
         img_prefix=data_root + 'images/',
         pipeline=train_pipeline),
     val=dict(
