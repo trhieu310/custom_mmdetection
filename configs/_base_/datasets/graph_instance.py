@@ -42,7 +42,9 @@ data = dict(
                 #   data_root + 'anns/ann_part_25_graph.json', 
                   data_root + 'anns/ann_part_26_graph.json',
                   data_root + 'anns/illustration.json',
-                  data_root + 'anns/table.json'],
+                  data_root + 'anns/table.json',
+                  data_root + 'anns/graphic.json',
+                  data_root + 'anns/graphical.json'],
         img_prefix=data_root + 'images/',
         pipeline=train_pipeline),
     val=dict(
@@ -52,8 +54,9 @@ data = dict(
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'anns/ann_part_27_graph.json',
-        # ann_file=data_root + 'anns/pr_v4.0.0_no_logo_table.json',
-        img_prefix=data_root + 'images/', #pr_v4.0.0_graph/
+        # ann_file=data_root + 'anns/ann_part_27_graph.json',
+        ann_file=data_root + 'true_pr_v4.0.0_graph.json',
+        img_prefix=data_root + 'pr_v4.0.0/pr_v4.0.0/',
+        # img_prefix=data_root + 'images/', #pr_v4.0.0_graph/
         pipeline=test_pipeline))
 evaluation = dict(classwise=True, metric=['bbox', 'segm'])
