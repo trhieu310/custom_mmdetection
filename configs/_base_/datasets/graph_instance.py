@@ -37,10 +37,14 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=[data_root + 'anns/ann_part_29_graph.json',
-                  data_root + 'anns/ann_part_24_graph.json',
-                #   data_root + 'anns/ann_part_25_graph.json', 
-                  data_root + 'anns/ann_part_26_graph.json',
+        ann_file=[data_root + 'anns/ann_part_27_graph.json',
+                  data_root + 'anns/ann_part_51.json',
+                  data_root + 'anns/ann_part_52.json', 
+                  data_root + 'anns/ann_part_53.json',
+                  data_root + 'anns/ann_part_54.json',
+                  data_root + 'anns/ann_part_55.json', 
+                  data_root + 'anns/ann_part_56.json',
+                  data_root + 'anns/ann_part_57.json',
                   data_root + 'anns/illustration.json',
                   data_root + 'anns/table.json',
                   data_root + 'anns/graphic.json',
@@ -49,7 +53,7 @@ data = dict(
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'anns/ann_part_28_graph.json',
+        ann_file=data_root + 'anns/ann_part_58.json',
         img_prefix=data_root + 'images/',
         pipeline=test_pipeline),
     test=dict(
