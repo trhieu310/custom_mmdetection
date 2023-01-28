@@ -38,13 +38,13 @@ data = dict(
     train=dict(
         type=dataset_type,
         ann_file=[data_root + 'anns/ann_part_27_graph.json',
-                  data_root + 'anns/ann_part_51.json',
-                  data_root + 'anns/ann_part_52.json', 
-                  data_root + 'anns/ann_part_53.json',
+                  data_root + 'anns/ann_part_70.json',
+                  data_root + 'anns/ann_part_71.json', 
+                  data_root + 'anns/ann_part_72.json',
                   data_root + 'anns/ann_part_54.json',
-                  data_root + 'anns/ann_part_55.json', 
-                  data_root + 'anns/ann_part_56.json',
-                  data_root + 'anns/ann_part_57.json',
+                  data_root + 'anns/ann_part_74.json', 
+                  data_root + 'anns/ann_part_75.json',
+                  data_root + 'anns/ann_part_76.json',
                   data_root + 'anns/r_1.0.2.json',
                   data_root + 'anns/r_1.0.3.json',
                   data_root + 'anns/real_exam_1.json',
@@ -54,7 +54,7 @@ data = dict(
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'anns/ann_part_58.json',
+        ann_file=data_root + 'anns/ann_part_77.json',
         img_prefix=data_root + 'images/',
         pipeline=test_pipeline),
     test=dict(
