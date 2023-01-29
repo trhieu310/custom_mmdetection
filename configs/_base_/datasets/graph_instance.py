@@ -41,7 +41,7 @@ data = dict(
                   data_root + 'anns/ann_part_70.json',
                   data_root + 'anns/ann_part_71.json', 
                   data_root + 'anns/ann_part_72.json',
-                  data_root + 'anns/ann_part_54.json',
+                  data_root + 'anns/ann_part_73.json',
                   data_root + 'anns/ann_part_74.json', 
                   data_root + 'anns/ann_part_75.json',
                   data_root + 'anns/ann_part_76.json',
