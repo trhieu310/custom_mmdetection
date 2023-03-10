@@ -249,3 +249,134 @@ def show_result_pyplot(model,
         text_color=(200, 200, 200),
         mask_color=palette,
         out_file=out_file)
+
+
+def coerce_to_path_and_check_exist(path):
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError('{} does not exist'.format(path.absolute()))
+    return path
+
+
+def coerce_to_path_and_create_dir(path):
+    path = Path(path)
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def download_from_url(url, save_path, file_name=None):
+    print("download file from url: ", url)
+    if file_name is None:
+        file_name = url.rsplit('/', 1)[1]
+    save_path = coerce_to_path_and_create_dir(save_path)
+    file_path = save_path / file_name
+    # Streaming, so we can iterate over the response.
+    response = requests.get(url, stream=True)
+    total_size_in_bytes = int(response.headers.get("content-length", 0))
+    block_size = 1024  # 1 Kibibyte
+    progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True)
+
+    with open(file_path, "wb") as file:
+        for data in response.iter_content(block_size):
+            progress_bar.update(len(data))
+            file.write(data)
+    progress_bar.close()
+    if total_size_in_bytes != 0 and progress_bar.n != total_size_in_bytes:
+        print("ERROR, something went wrong when download file from url")
+
+
+class Graphical:
+    def __init__(self):
+        self.BASE_DIR = os.path.expanduser("~/.god/")
+        self.URL = "http://minio.dev.ftech.ai/graphical-object-detection-v0.0.0-cfee6cfb"
+        self.BASE_CONFIG_DIR = f"{self.BASE_DIR}/configs"
+        self.CONFIG_FILE_NAME = "cascade_mask_rcnn_r50_fpn_1x_graph.py"
+        self.WEIGHT_FILE_NAME = "god_v0.0.0.pth"
+        self.CONFIG_FILE_DEFAULT = f"{self.BASE_CONFIG_DIR}/{self.CONFIG_FILE_NAME}"
+        self.WEIGHT_FILE_DEFAULT = f"{self.BASE_CONFIG_DIR}/{self.WEIGHT_FILE_NAME}"
+
+        if torch.cuda.is_available():
+            self.device = 'cuda:0'
+        else:
+            self.device = "cpu"
+        self.model = init_detector(
+            self.CONFIG_FILE_DEFAULT, self.WEIGHT_FILE_DEFAULT, self.device)
+        self.setup_cfg()
+
+    def setup_cfg(self):
+        try:
+            self.config_path = coerce_to_path_and_check_exist(
+                self.CONFIG_FILE_DEFAULT)
+            self.weight_path = coerce_to_path_and_check_exist(
+                self.WEIGHT_FILE_DEFAULT)
+        except:
+            # dowload file config
+            config_dir = coerce_to_path_and_create_dir(self.BASE_CONFIG_DIR)
+            config_name = self.config_path.split("/")[-1]
+            weight_name = self.weight_path.split("/")[-1]
+            config_url = f"{self.URL}/{config_name}"
+            weight_url = f"{self.URL}/{weight_name}"
+            download_from_url(config_url, config_dir, file_name=config_name)
+            download_from_url(weight_url, config_dir, file_name=weight_name)
+
+            self.config_path = config_dir / config_name
+            self.weight_path = config_dir / weight_name
+            if self.CONFIG_FILE_DEFAULT is not None:
+                try:
+                    _ = coerce_to_path_and_check_exist(
+                        self.CONFIG_FILE_DEFAULT)
+                except:
+                    base_config_url = f"{self.URL}/{self.CONFIG_FILE_NAME}"
+                    download_from_url(base_config_url, config_dir,
+                                      file_name=self.CONFIG_FILE_NAME)
+
+            if self.WEIGHT_FILE_DEFAULT is not None:
+                try:
+                    _ = coerce_to_path_and_check_exist(
+                        self.WEIGHT_FILE_DEFAULT)
+                except:
+                    base_weight_url = f"{self.URL}/{self.WEIGHT_FILE_NAME}"
+                    download_from_url(base_weight_url, config_dir,
+                                      file_name=self.WEIGHT_FILE_NAME)
+
+    def inference(self, image):
+        result_anns = []
+        result = inference_detector(self.model, image)
+        if isinstance(result, tuple):
+            bbox_result, segm_result = result
+            if isinstance(segm_result, tuple):
+                segm_result = segm_result[0]  # ms rcnn
+        else:
+            bbox_result, segm_result = result, None
+        bboxes = np.vstack(bbox_result)
+        labels = [
+            np.full(bbox.shape[0], i, dtype=np.int32)
+            for i, bbox in enumerate(bbox_result)
+        ]
+        labels = np.concatenate(labels)
+        scores = bboxes[:, -1]
+        idx = 1
+        for lb, box, score in zip(labels, bboxes, scores):
+            if score > 0.75:
+                w = box[2] - box[0]
+                h = box[3] - box[1]
+                instance = {
+                    "id": idx,
+                    "category_id": int(lb + 5),
+                    "segmentation": [[box[0], box[1],
+                                     box[2], box[1],
+                                     box[2], box[3],
+                                     box[0], box[3]]],
+                    "area": round(float(w * h), 2),
+                    "bbox": [
+                        round(float(box[0]), 2),
+                        round(float(box[1]), 2),
+                        round(float(w), 2),
+                        round(float(h), 2)
+                    ],
+                    "pred_values": "",
+                    "score": score,
+                }
+                result_anns.append(instance)
+                idx += 1
+        return result_anns

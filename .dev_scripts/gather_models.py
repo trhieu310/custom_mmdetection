@@ -142,7 +142,8 @@ def get_dataset_name(config):
         WIDERFaceDataset='WIDER Face',
         OpenImagesDataset='OpenImagesDataset',
         OpenImagesChallengeDataset='OpenImagesChallengeDataset',
-        DocslayoutDataset = 'DocslayoutDataset')
+        DocslayoutDataset = 'DocslayoutDataset',
+        GraphDataset = 'GraphDataset')
     cfg = mmcv.Config.fromfile('./configs/' + config)
     return name_map[cfg.dataset_type]
 

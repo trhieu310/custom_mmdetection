@@ -302,13 +302,18 @@ def oid_v6_classes():
         'Rugby ball', 'Armadillo', 'Maracas', 'Helmet'
     ]
 
+
 def docslayout_classes():
     return [
         'Illustration', 'Text', 'ScienceText'
     ]
 
+
 def graph_classes():
-    return ['Table', 'Graphic', 'Geometry', 'Logo', 'Figure', 'Variation', 'Natural']
+    return ['Graphic', 'Natural', 'Variation', 'Figure', 'Logo', 'Geometry',
+            'TB_Full_lined', 'TB_Merged_cells', 'TB_Partial_lined',
+            'TB_Partial_line_MC', 'TB_No_lines']
+
 
 dataset_aliases = {
     'voc': ['voc', 'pascal_voc', 'voc07', 'voc12'],

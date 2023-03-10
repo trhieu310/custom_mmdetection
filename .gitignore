@@ -122,3 +122,9 @@ work_dirs/
 *.pth
 *.py~
 *.sh~
+*.json
+*.ipynb
+
+.mmdetection/
+checkpoints/
+demo/

@@ -258,5 +258,17 @@ model = init_detector(config_file, checkpoint_file, device=device)
 # inference the demo image
 inference_detector(model, 'demo/demo.jpg')
 ```
-
+### For inference Graphical Object
+Download weight at: [Link](https://drive.google.com/drive/folders/1hljrhRDTOe0dazsuuPm__slI4d8aY6Rg?usp=share_link)
+# Run evalutation 
+``` Python
+python3 tools/test.py configs/cascade_rcnn/cascade_mask_rcnn_r50_fpn_1x_graph.py checkpoints/Graphical_v1.0.0.pth --eval bbox --work-dir checkpoints/eval --out checkpoints/Graphical_v1.0.0_eval.pkl
+# Analysis evaluation results
+python3 tools/analysis_tools/analyze_results.py configs/cascade_rcnn/cascade_mask_rcnn_r50_fpn_1x_graph.py checkpoints/Graphical_v1.0.0_eval.pkl checkpoints/eval
+```
+# Run inference demo
+``` Python
+python3 demo/image_demo.py demo/input_image.jpg configs/cascade_rcnn/cascade_mask_rcnn_r50_fpn_1x_graph.py checkpoints/Graphical_v1.0.0.pth --out-file demo/output_image.jpg --score-thr 0.5
+# Image predicted include bbox and segment of object
+```
 The above code is supposed to run successfully upon you finish the installation.
