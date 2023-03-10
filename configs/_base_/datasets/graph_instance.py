@@ -7,7 +7,7 @@ classes = ('Graphic', 'Natural', 'Variation', 'Figure', 'Logo', 'Geometry',
            'TB_Partial_line_MC', 'TB_No_lines')
 # data_root = '/home/hieunt/Graph_Object_Data/'
 # data_root = '../../input/graphical/'
-data_root = '../../input/god_coco/'
+data_root = '../../input/god-coco/'
 test_root = "/home/null/GOD_DATA/pr_test/"
 img_norm_cfg = dict(
     mean=[237.48618173, 236.966083, 237.09603447], std=[37.42294109, 37.52417463, 38.4937926], to_rgb=True)
